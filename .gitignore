@@ -1,0 +1,14 @@
+# Terraform files
+*.tfstate
+*.tfstate.*
+crash.log
+*.tfvars
+*.tfvars.json
+.terraform/
+.terraform.lock.hcl
+
+# Ignore editor and OS-specific files
+*.swp
+*.swo
+.DS_Store
+
