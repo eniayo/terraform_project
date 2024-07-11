@@ -5,4 +5,6 @@ module "ec2" {
   instance_type = "t2.micro"
   key_pair_name = "dove-key"
   user_data     = file("${path.module}/nginx.sh")
+  vpc_security_group_ids = [module.sg.sg_id]
+  subnet_id = module.vpc.public_subnet_id
 }
