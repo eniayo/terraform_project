@@ -23,7 +23,20 @@ variable "user_data" {
 
 variable "key_pair_name" {
     description = "key pair name"
-    type = string
+    type = string 
+
+}
+
+variable "vpc_security_group_ids" {
+    description = "sg ids"
+    default = []
+    type = list(string)
   
 }
 
+variable "subnet_id" {
+    description = "subnet id"
+    default = ""
+    type = string
+  
+}

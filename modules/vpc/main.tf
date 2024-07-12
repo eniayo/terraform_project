@@ -16,7 +16,6 @@ resource "aws_internet_gateway" "gw" {
 }
 
 resource "aws_subnet" "public_subnet" {
-  count                   = 3
   vpc_id                  = aws_vpc.vpc.id
   cidr_block              = var.public_subnet_cidr
   map_public_ip_on_launch = var.public_ip_on_launch
@@ -27,7 +26,6 @@ resource "aws_subnet" "public_subnet" {
 
 
 resource "aws_subnet" "private_subnet" {
-  count      = 3
   vpc_id     = aws_vpc.vpc.id
   cidr_block = var.private_subnet_cidr
   tags = {
@@ -44,7 +42,7 @@ resource "aws_subnet" "database" {
 
 }
 resource "aws_route_table_association" "pub_rt" {
-  subnet_id      = element(aws_subnet.public_subnet.*.id, count.index)
+  subnet_id      = aws_subnet.public_subnet.id
   route_table_id = aws_route_table.public_rt.id
 }
 
@@ -86,7 +84,7 @@ resource "aws_route_table" "database" {
 }
 
 resource "aws_route_table_association" "database" {
-  subnet_id      = element(aws_subnet.database.*.id, count.index)
+  subnet_id      = aws_subnet.public_subnet.id
   route_table_id = aws_route_table.database.id
 }
 
@@ -109,7 +107,7 @@ resource "aws_nat_gateway" "nat" {
 
 resource "aws_db_subnet_group" "db_sb_gp" {
   name       = var.database_subnet_group
-  subnet_ids = aws_subnet.database.id
+  subnet_ids = [aws_subnet.database.id]
   tags = {
     Name = var.database_subnet_group
   }

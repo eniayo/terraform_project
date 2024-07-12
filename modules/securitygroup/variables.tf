@@ -12,7 +12,6 @@ variable "sg_ports" {
 
 variable "vpc_id" {
     description = "vpc id is to create sg in"
-    default = ""
+    default = "vpc-062c8dc0d3ab38719"
     type = string
-  
 }
