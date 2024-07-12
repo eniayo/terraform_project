@@ -22,9 +22,15 @@ jobs:
           aws-secret-access-key: V7/FbIvgsxgDmFQmTb/zeRl0J/wcA9/28BwOMlWi
           aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Verify AWS credentials
-        run: |
-          aws sts get-caller-identity --profile terradmin  # Validate AWS credentials
+      - name: Print AWS CLI Configuration
+        run: aws configure list
+
+      - name: Verify AWS Credentials
+        run: aws sts get-caller-identity
+
+      # - name: Verify AWS credentials
+      #   run: |
+      #     aws sts get-caller-identity --profile terradmin  # Validate AWS credentials
 
       - name: Terraform init
         run: terraform init
