@@ -16,13 +16,11 @@ jobs:
         uses: hashicorp/setup-terraform@v1
 
       - name: Configure AWS credentials
-        run: |
-          mkdir -p ~/.aws
-          echo "[terradmin]" >> ~/.aws/credentials
-          echo "aws-access-key-id=${{ secrets.AWS_ACCESS_KEY_ID }}" >> ~/.aws/credentials
-          echo "aws-secret-access-key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> ~/.aws/credentials
-          cat ~/.aws/credentials  # For debugging
-          aws configure  # List AWS CLI configuration for debugging
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Verify AWS credentials
         run: |
