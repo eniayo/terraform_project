@@ -23,6 +23,7 @@ jobs:
         run: terraform plan -out=tfplan
         working-directory: dev  # Adjust to your 'dev' directory
         env:
+          AWS_PROFILE: terradmin 
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
