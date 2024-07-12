@@ -17,18 +17,18 @@ jobs:
 
       - name: Terraform init
         run: terraform init
-        working-directory: modules  # Adjust to your modules directory
+        working-directory: dev  # Adjust to your 'dev' directory
 
       - name: Terraform plan
         run: terraform plan -out=tfplan
-        working-directory: modules  # Adjust to your modules directory
+        working-directory: dev  # Adjust to your 'dev' directory
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Terraform apply
         run: terraform apply -auto-approve tfplan
-        working-directory: modules  # Adjust to your modules directory
+        working-directory: dev  # Adjust to your 'dev' directory
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
